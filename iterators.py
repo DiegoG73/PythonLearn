@@ -8,6 +8,7 @@ class FiboIter():
         self.n1 = 0
         self.n2 = 1
         self.counter = 0
+        self.max 
         return self
 
     def __next__(self):
@@ -19,14 +20,19 @@ class FiboIter():
             return self.n2
         else:
             self.aux = self.n1 + self.n2
-            # self.n1 = self.n2
-            # self.n2 = self.aux
             self.n1, self.n2 = self.n2, self.aux
             self.counter += 1
-            return self.aux
+            if not self.max:
+                return self.aux
+            if self.max:
+                if self.aux > self.max:
+                    raise StopIteration
+                else:
+                    return self.aux
 
 if __name__ == '__main__':
     fibonacci = FiboIter()
+
     for element in fibonacci:
         print(element)
-        time.sleep(0.05)
+        time.sleep(0.5)
